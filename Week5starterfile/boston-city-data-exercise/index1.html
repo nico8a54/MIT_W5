@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="container">
+    <!-- populated by JS-->
+  </div>
+  <script src="./boston.js"></script>
+  <script>
+    function renderboston(boston, container) {
+      var person = boston.data;
+      var len = boston.data.length;
+      var html = '';
+      var topPayed = [];
+      for (let i = 0; i < len; i++) {
+        html += '<li class="post">' +
+          '<h2>' + person[i][8] + '</h2>' +
+          '<h3>' + person[i][11] + '</h3>';
+        topPayed.push(person[i][11]);
+      };
+     
+      
+      topPayed.sort(function (a,b) {return b - a});
+      console.log("Top 5 salaries are:");
+      console.log("No. 1: " + "$"+topPayed[0]);
+      console.log("No. 2: " + "$"+topPayed[1]);
+      console.log("No. 3: " + "$"+topPayed[2]);
+      console.log("No. 4: " + "$"+topPayed[3]);
+      console.log("No. 5: " + "$"+topPayed[4]);
+
+      var peopleOver100K = topPayed.filter(over100k);
+      function over100k(a) { return a >= 100000};
+
+      console.log ("There are " + peopleOver100K.length + " people earning more than 100k in Boston");
+
+
+      
+      container.innerHTML = '<ul id = "boston">' + html + '</ul>';
+    }
+    renderboston(boston, document.getElementById('container'));
+  </script>
+  
+</body>
+</html>
+
+
